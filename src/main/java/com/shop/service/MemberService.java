@@ -4,6 +4,7 @@ import com.shop.constant.Role;
 import com.shop.entity.Member;
 import com.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,9 +20,26 @@ public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
     public Member saveMember(Member member){
         validateDuplicateMember(member);
         return memberRepository.save(member);
+    }
+
+    
+    //회원 정보창 로그인 비밀번호 확인
+    public boolean checkPassword(String realPassword, String checkPassword) {
+        boolean matches = passwordEncoder.matches(checkPassword, realPassword);
+        return matches;
+    }
+    //회원 정보 수정
+    public void UpdateMember(Member member){
+        Long memberId = memberRepository.findIdByEmail(member.getEmail());
+        member.setId(memberId);
+        System.out.println(member.toString());
+        System.out.println("======================================================================");
+        memberRepository.save(member);
     }
 
     private void validateDuplicateMember(Member member){
@@ -47,6 +65,7 @@ public class MemberService implements UserDetailsService {
                 .build();
     }
 
+    //회원 권한 설정
     public void grantRole(String email, Role role){
         Member member = memberRepository.findByEmail(email);
 
