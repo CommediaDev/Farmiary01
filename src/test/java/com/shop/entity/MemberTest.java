@@ -73,11 +73,4 @@ public class MemberTest {
 
     }
 
-    @Test
-    @DisplayName("Role조건으로 멤버 불러오기")
-    public void findAllByRoleTest() {
-        Member member = createMember();
-
-        memberRepository.findAllByRole(Role.USER);
-    }
 }

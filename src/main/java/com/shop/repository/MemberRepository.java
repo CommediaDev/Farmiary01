@@ -9,7 +9,8 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface MemberRepository extends JpaRepository<Member, Long> {
+public interface MemberRepository extends JpaRepository<Member, Long>,
+MemberRepositoryCustom{
 
     Member findByEmail(String email);
 
@@ -18,5 +19,4 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     )
     Long findIdByEmail(@Param("email") String email);
 
-    List<MemberDto> findAllByRole(Role role);
 }

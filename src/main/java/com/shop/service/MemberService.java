@@ -1,10 +1,11 @@
 package com.shop.service;
 
 import com.shop.constant.Role;
-import com.shop.dto.MemberDto;
 import com.shop.entity.Member;
 import com.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,8 +14,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import java.util.List;
 
 @Service
 @Transactional
@@ -85,10 +84,9 @@ public class MemberService implements UserDetailsService {
         System.out.println("======================================");
     }
 
-    //회원 리스트 Dto 가져오기
-    public List<MemberDto> getMemberDtoList() {
-        List<MemberDto> memberDtoList = memberRepository.findAllByRole(Role.CANDIDATE);
 
-        return  memberDtoList;
+    @Transactional(readOnly = true)
+    public Page<Member> getRolePage(Pageable pageable) {
+        return memberRepository.getRolePage(pageable);
     }
 }
