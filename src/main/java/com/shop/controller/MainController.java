@@ -34,4 +34,9 @@ public class MainController {
         return "main";
     }
 
+    @GetMapping(value = "/myPage")
+    public String myPage(){
+        return "/member/myPage";
+    }
+
 }

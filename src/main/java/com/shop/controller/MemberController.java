@@ -1,5 +1,6 @@
 package com.shop.controller;
 
+import com.shop.constant.Role;
 import com.shop.dto.MemberFormDto;
 import com.shop.repository.MemberRepository;
 import com.shop.service.MemberService;
@@ -59,7 +60,7 @@ public class MemberController {
     @GetMapping(value = "/login/error")
     public String loginError(Model model){
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
-        return "/member/memberLoginForm";
+        return "member/memberLoginForm";
     }
 
     //회원 정보 수정 창을 접근하기 위해 다시한번 로그인
@@ -70,7 +71,7 @@ public class MemberController {
     @GetMapping(value = "/infoLogin/error")
     public String infoLoginError(Model model){
         model.addAttribute("loginErrorMsg", "비밀번호를 확인해주세요");
-        return "/member/memberModifyLoginForm";
+        return "member/memberModifyLoginForm";
     }
     
     //회원 정보 수정 창 접근 위한 로그인 처리
@@ -93,7 +94,7 @@ public class MemberController {
 
         model.addAttribute("memberFormDto", new MemberFormDto());
 
-        return "/member/memberModifyForm";
+        return "member/memberModifyForm";
     }
     
     //회원 정보 수정 처리
@@ -116,4 +117,18 @@ public class MemberController {
 
         return "redirect:/";
     }
+
+    //판매자 신청 페이지
+    @GetMapping(value = "/request")
+    public String requestSeller(){
+        return "member/sellerRequestForm";
+    }
+
+    //판매자 신청 처리
+    @PostMapping(value = "/request")
+    public String RequestSeller(Principal principal){
+        memberService.grantRole(principal.getName(), Role.CANDIDATE);
+        return "redirect:/members/logout";
+    }
+
 }

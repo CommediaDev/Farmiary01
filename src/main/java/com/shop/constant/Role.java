@@ -1,5 +1,5 @@
 package com.shop.constant;
 
 public enum Role {
-    USER, ADMIN, SELLER
+    USER, ADMIN, SELLER, CANDIDATE
 }

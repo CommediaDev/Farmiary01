@@ -1,5 +1,6 @@
 package com.shop.entity;
 
+import com.shop.constant.Role;
 import com.shop.dto.MemberFormDto;
 import com.shop.repository.MemberRepository;
 import com.shop.service.MemberService;
@@ -70,5 +71,13 @@ public class MemberTest {
 
         memberRepository.findIdByEmail(member.getEmail());
 
+    }
+
+    @Test
+    @DisplayName("Role조건으로 멤버 불러오기")
+    public void findAllByRoleTest() {
+        Member member = createMember();
+
+        memberRepository.findAllByRole(Role.USER);
     }
 }
