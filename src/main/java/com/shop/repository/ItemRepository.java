@@ -1,6 +1,8 @@
 package com.shop.repository;
 
 import com.shop.entity.Item;
+import com.shop.entity.Order;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -28,5 +30,6 @@ public interface ItemRepository extends JpaRepository<Item, Long>,
     @Query(value="select * from item i where i.item_detail like " +
             "%:itemDetail% order by i.price desc", nativeQuery = true)
     List<Item> findByItemDetailByNative(@Param("itemDetail") String itemDetail);
+
 
 }
