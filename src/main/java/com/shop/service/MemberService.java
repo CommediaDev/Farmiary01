@@ -89,4 +89,9 @@ public class MemberService implements UserDetailsService {
     public Page<Member> getRolePage(Pageable pageable) {
         return memberRepository.getRolePage(pageable);
     }
+
+    @Transactional(readOnly = true)
+    public Page<Member> getRolePage2(Pageable pageable) {
+        return memberRepository.getRolePage2(pageable);
+    }
 }

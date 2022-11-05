@@ -1,5 +1,7 @@
 package com.shop.controller;
 
+import com.shop.dto.ItemImgDto;
+import com.shop.dto.ItemListDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -117,15 +119,22 @@ public class ItemController {
         return "item/itemDtl";
     }
 
-    @GetMapping(value = "/itemList")
+    @GetMapping(value = {"/item/itemList","/item/itemList/{page}"})
     public String itemList(ItemSearchDto itemSearchDto, @PathVariable("page") Optional<Integer> page, Model model){
 
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
-        Page<Item> items = itemService.getAdminItemPage(itemSearchDto, pageable);
+        Page<ItemListDto> items = itemService.getItemListPage(itemSearchDto, pageable);
 
         model.addAttribute("items", items);
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage", 5);
+
+        System.out.println("======================================");
+        System.out.println(items.getTotalElements());
+        System.out.println(items.getTotalPages());
+        System.out.println(items.getContent().toString());
+        System.out.println(items.getContent().stream().toArray());
+        System.out.println("=======================================");
 
         return "item/itemList";
     }
