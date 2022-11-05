@@ -20,7 +20,7 @@
             var searchBy = $("#searchBy").val();
             var searchQuery = $("#searchQuery").val();
 
-            location.href="/admin/items/" + page + "?searchDateType=" + searchDateType
+            location.href="/item/itemList/" + page + "?searchDateType=" + searchDateType
             + "&searchSellStatus=" + searchSellStatus
             + "&searchBy=" + searchBy
             + "&searchQuery=" + searchQuery;
@@ -40,11 +40,12 @@
 
 <div layout:fragment="content">
 
-    <form th:action="@{'/admin/items/' + ${items.number}}" role="form" method="get" th:object="${items}">
+
         <table class="table">
             <thead>
             <tr>
                 <td>상품아이디</td>
+                <td>상품이미지</td>
                 <td>상품명</td>
                 <td>상태</td>
                 <td>등록자</td>
@@ -52,18 +53,22 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="item, status: ${items.getContent()}">
+            <tr th:each="item, status: ${items}">
                 <td th:text="${item.id}"></td>
+                <td class="repImgDiv">
+                    <img th:src="${item.imgUrl}" class = "rounded repImg" width="100px" height="100px">
+                </td>
                 <td>
                     <a th:href="'/item/'+${item.id}" th:text="${item.itemNm}"></a>
                 </td>
                 <td th:text="${item.itemSellStatus == T(com.shop.constant.ItemSellStatus).SELL} ? '판매중' : '품절'"></td>
                 <td th:text="${item.createdBy}"></td>
-                <td th:text="${item.regTime}"></td>
+                <td th:text="${#temporals.format(item.updateTime, 'yyyy-MM-dd')}"></td>
             </tr>
             </tbody>
         </table>
 
+        <form th:action="@{'/item/itemList/' + ${items.number}}" role="form" method="get" th:object="${items}">
         <div th:with="start=${(items.number/maxPage)*maxPage + 1}, end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
             <ul class="pagination justify-content-center">
 

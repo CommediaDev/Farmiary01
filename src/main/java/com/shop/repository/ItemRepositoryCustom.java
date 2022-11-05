@@ -1,5 +1,7 @@
 package com.shop.repository;
 
+import com.shop.dto.ItemImgDto;
+import com.shop.dto.ItemListDto;
 import com.shop.dto.ItemSearchDto;
 import com.shop.entity.Item;
 import org.springframework.data.domain.Page;
@@ -11,5 +13,7 @@ public interface ItemRepositoryCustom {
     Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable);
 
     Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable);
+
+    Page<ItemListDto> getItemListPage(ItemSearchDto itemSearchDto, Pageable pageable);
 
 }

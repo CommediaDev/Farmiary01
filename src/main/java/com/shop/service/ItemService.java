@@ -96,5 +96,10 @@ public class ItemService {
         return itemRepository.getMainItemPage(itemSearchDto, pageable);
     }
 
+    @Transactional(readOnly = true)
+    public Page<ItemListDto> getItemListPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getItemListPage(itemSearchDto, pageable);
+    }
+
 
 }
