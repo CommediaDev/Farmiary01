@@ -34,7 +34,7 @@ public class BoardController {
 
 	private final MemberService memberService;
 
-	@GetMapping(value = "/boardMain")
+	@GetMapping(value = "/board/boardMain")
 	public String main(ItemSearchDto itemSearchDto, BoardSearchDto boardSearchDto,
 					   Optional<Integer> page, Model model){
 
@@ -138,7 +138,7 @@ public class BoardController {
 
 
 	//블로거 리스트 출력
-	@GetMapping({"/bloger","/bloger/{page}"})
+	@GetMapping({"/board/bloger","/board/bloger/{page}"})
 	public String permitPage(Model model, @PathVariable("page")Optional<Integer> page){
 
 		Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
@@ -147,6 +147,6 @@ public class BoardController {
 		model.addAttribute("members", members);
 		model.addAttribute("maxPage", 5);
 
-		return "member/sellerList";
+		return "board/sellerList";
 	}
 }

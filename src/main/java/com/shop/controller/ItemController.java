@@ -117,7 +117,7 @@ public class ItemController {
         return "item/itemDtl";
     }
 
-    @GetMapping(value = "/itemList")
+    @GetMapping(value = "/item/itemList")
     public String itemList(ItemSearchDto itemSearchDto, @PathVariable("page") Optional<Integer> page, Model model){
 
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
