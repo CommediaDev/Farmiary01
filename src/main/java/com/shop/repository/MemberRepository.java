@@ -19,4 +19,5 @@ MemberRepositoryCustom{
     )
     Long findIdByEmail(@Param("email") String email);
 
+
 }

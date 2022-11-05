@@ -72,6 +72,7 @@ public class BoardController {
 			boardService.saveBoard(boardFormDto, boardImgFileList);
 			// 게시글 저장 로직 호출 매개 변수로 게시글 정보와 개시글 이미지 정보를 담고 있는 boardImgFileList를 넘김
 		} catch (Exception e) {
+			e.printStackTrace();
 			model.addAttribute("errorMessage", "게시글 등록 중 에러가 발생하였습니다.");
 			return "board/boardForm";
 		}
