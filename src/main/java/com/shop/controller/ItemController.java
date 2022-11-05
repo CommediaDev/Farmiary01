@@ -129,13 +129,6 @@ public class ItemController {
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage", 5);
 
-        System.out.println("======================================");
-        System.out.println(items.getTotalElements());
-        System.out.println(items.getTotalPages());
-        System.out.println(items.getContent().toString());
-        System.out.println(items.getContent().stream().toArray());
-        System.out.println("=======================================");
-
         return "item/itemList";
     }
 

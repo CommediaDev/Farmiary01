@@ -28,6 +28,9 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
     private BooleanExpression selectCandidate(Role role){
         return QMember.member.role.eq(Role.CANDIDATE);
     }
+    private BooleanExpression selectSeller(Role role){
+        return QMember.member.role.eq(Role.SELLER);
+    }
 
     @Override
     public Page<Member> getRolePage(Pageable pageable) {
@@ -51,13 +54,13 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
 
         List<Member> content = queryFactory
                 .selectFrom(QMember.member)
-                .where(selectCandidate(Role.CANDIDATE))
+                .where(selectSeller(Role.SELLER))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
 
         long total = queryFactory.select(Wildcard.count).from(QMember.member)
-                .where(selectCandidate(Role.SELLER))
+                .where(selectSeller(Role.SELLER))
                 .fetchOne();
 
         return new PageImpl<>(content, pageable, total);
