@@ -19,7 +19,8 @@
 </br>
 
 ## 3.ERD 설계
-![Alt text](/sunghoonhong/erd.png "Optional title")
+![ERD](https://user-images.githubusercontent.com/64462106/200100548-79fbc8b2-6e86-40c3-8dcd-4962e9553b2e.png)
+
 
 
 
