@@ -45,4 +45,21 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
 
         return new PageImpl<>(content, pageable, total);
     }
+
+    @Override
+    public Page<Member> getRolePage2(Pageable pageable) {
+
+        List<Member> content = queryFactory
+                .selectFrom(QMember.member)
+                .where(selectCandidate(Role.CANDIDATE))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        long total = queryFactory.select(Wildcard.count).from(QMember.member)
+                .where(selectCandidate(Role.SELLER))
+                .fetchOne();
+
+        return new PageImpl<>(content, pageable, total);
+    }
 }

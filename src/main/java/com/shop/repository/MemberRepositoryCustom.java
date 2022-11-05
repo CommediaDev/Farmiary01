@@ -7,4 +7,5 @@ import org.springframework.data.domain.Pageable;
 public interface MemberRepositoryCustom {
 
     Page<Member> getRolePage(Pageable pageable);
+    Page<Member> getRolePage2(Pageable pageable);
 }

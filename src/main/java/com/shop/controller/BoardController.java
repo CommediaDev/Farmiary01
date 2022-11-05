@@ -7,6 +7,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import com.shop.dto.*;
+import com.shop.entity.Member;
+import com.shop.service.MemberService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +31,8 @@ import lombok.RequiredArgsConstructor;
 public class BoardController {
 	
 	private final BoardService boardService;
+
+	private final MemberService memberService;
 
 	@GetMapping(value = "/boardMain")
 	public String main(ItemSearchDto itemSearchDto, BoardSearchDto boardSearchDto,
@@ -130,5 +134,19 @@ public class BoardController {
 		BoardFormDto boardFormDto = boardService.getBoardDtl(boardId);
 		model.addAttribute("board", boardFormDto);
 		return "board/boardDtl";
+	}
+
+
+	//블로거 리스트 출력
+	@GetMapping({"/bloger","/bloger/{page}"})
+	public String permitPage(Model model, @PathVariable("page")Optional<Integer> page){
+
+		Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
+		Page<Member> members = memberService.getRolePage2(pageable);
+
+		model.addAttribute("members", members);
+		model.addAttribute("maxPage", 5);
+
+		return "member/sellerList";
 	}
 }
