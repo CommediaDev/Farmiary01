@@ -38,7 +38,7 @@
     <div id="carouselControls" class="carousel slide margin" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active item">
-                <img class="d-block w-100 banner" src="/img/banner.png" alt="First slide">
+                <img class="d-block w-100 banner" src="/images/쇼핑몰배너.png" alt="First slide">
             </div>
         </div>
     </div>
@@ -66,6 +66,7 @@
         </th:block>
     </div>
 
+    <!--페이징 처리-->
     <div th:with="start=${(items.number/maxPage)*maxPage + 1}, end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
         <ul class="pagination justify-content-center">
 
