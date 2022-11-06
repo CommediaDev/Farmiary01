@@ -34,4 +34,17 @@ public class MainController {
         return "main";
     }
 
+<<<<<<< HEAD
+=======
+    @GetMapping(value = "/myPage")
+    public String myPage(){
+        return "/member/myPage";
+    }
+    
+    @GetMapping(value = "/members/kakao_login")
+    public String kakaoLogin() {
+    	return "/member/kakao_login";
+    }
+
+>>>>>>> 00d497e (추가 수정)
 }
