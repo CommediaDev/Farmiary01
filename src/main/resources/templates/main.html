@@ -35,96 +35,162 @@
 
 <div layout:fragment="content">
 
-  <div id="carouselControls" class="carousel slide margin" data-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active item">
-        <img class="d-block w-100 banner" src="/img/banner.png" alt="First slide">
-      </div>
-    </div>
-  </div>
+
   <!-- 우측 상단 검색 메뉴 -->
   <input type="hidden" name="searchQuery" th:value="${itemSearchDto.searchQuery}">
   <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
     <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + '검색 결과'"></p>
   </div>
 
-  <!-- 메인 상품 정보 -->
-  <div class="row">
-    <th:block th:each="item, status: ${items.getContent()}">
-      <div class="col-md-4 margin">
-        <div class="card">
-          <a th:href="'/item/' +${item.id}" class="text-dark">
-            <img th:src="${item.imgUrl}" class="card-img-top" th:alt="${item.itemNm}" height="400">
-            <div class="card-body">
-              <h4 class="card-title">[[${item.itemNm}]]</h4>
-              <p class="card-text">[[${item.itemDetail}]]</p>
-              <h3 class="card-title text-danger">[[${item.price}]]원</h3>
+  <!-- ======= Hero Slider Section ======= -->
+  <section id="hero-slider" class="hero-slider">
+    <div class="container-md" data-aos="fade-in">
+      <div class="row">
+        <div class="col-12">
+          <div class="swiper sliderFeaturedPosts">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('../bootstrap/img/main.jpg');">
+                  <div class="img-bg-inner">
+                    <h2>The Best Homemade Masks for Face (keep the Pimples Away)</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
+                  </div>
+                </a>
+              </div>
+
+              <div class="swiper-slide">
+                <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('../bootstrap/img/main2.jpg');">
+                  <div class="img-bg-inner">
+                    <h2>17 Pictures of Medium Length Hair in Layers That Will Inspire Your New Haircut</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
+                  </div>
+                </a>
+              </div>
+
+              <div class="swiper-slide">
+                <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('../bootstrap/img/main3.jpg');">
+                  <div class="img-bg-inner">
+                    <h2>13 Amazing Poems from Shel Silverstein with Valuable Life Lessons</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
+                  </div>
+                </a>
+              </div>
+
+              <div class="swiper-slide">
+                <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('../bootstrap/img/main4.jpg');">
+                  <div class="img-bg-inner">
+                    <h2>9 Half-up/half-down Hairstyles for Long and Medium Hair</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
+                  </div>
+                </a>
+              </div>
             </div>
-          </a>
+            <div class="custom-swiper-button-next">
+              <span class="bi-chevron-right"></span>
+            </div>
+            <div class="custom-swiper-button-prev">
+              <span class="bi-chevron-left"></span>
+            </div>
+
+            <div class="swiper-pagination"></div>
+          </div>
         </div>
       </div>
-    </th:block>
-  </div>
+    </div>
+  </section><!-- End Hero Slider Section -->
 
-  <div th:with="start=${(items.number/maxPage)*maxPage + 1}, end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
-    <ul class="pagination justify-content-center">
 
-      <li class="page-item" th:classappend="${items.number eq 0}?'disabled':''">
-        <a th:href="@{'/?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number-1}}" aria-label='Previous' class="page-link">
-          <span aria-hidden='true'>Previous</span>
-        </a>
-      </li>
+  <!-- ======= Culture Category Section ======= -->
+  <section class="category-section">
+    <div class="container" data-aos="fade-up">
 
-      <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${items.number eq page-1}?'active':''">
-        <a th:href="@{'/?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
-      </li>
-
-      <li class="page-item" th:classappend="${items.number+1 ge items.totalPages}?'disabled':''">
-        <a th:href="@{'/?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number+1}}" aria-label='Next' class="page-link">
-          <span aria-hidden='true'>Next</span>
-        </a>
-      </li>
-
-    </ul>
-  </div>
-
-  <!-- 게시글 정보 -->
-  <div class="row">
-    <th:block th:each="board, status: ${boards.getContent()}">
-      <div class="col-md-4 margin">
-        <div class="card">
-          <a th:href="'/board/' +${board.id}" class="text-dark">
-            <img th:src="${board.imgUrl}" class="card-img-top" th:alt="${board.title}" height="400">
-            <div class="card-body">
-              <h4 class="card-title">[[${board.title}]]</h4>
-              <p class="card-text">[[${board.content}]]</p>
-            </div>
-          </a>
-        </div>
+      <div class="section-header d-flex justify-content-between align-items-center mb-5">
+        <h2>Post</h2>
+        <div><a th:href="@{#}" class="more">See All Post</a></div>
       </div>
-    </th:block>
-  </div>
 
-  <div th:with="start=${(boards.number/maxPage)*maxPage + 1}, end=(${(boards.totalPages == 0) ? 1 : (start + (maxPage - 1) < boards.totalPages ? start + (maxPage - 1) : boards.totalPages)})" >
-    <ul class="pagination justify-content-center">
+      <div class="row">
 
-      <li class="page-item" th:classappend="${boards.number eq 0}?'disabled':''">
-        <a th:href="@{'/?searchQuery=' + ${boardSearchDto.searchQuery} + '&page=' + ${boards.number-1}}" aria-label='Previous' class="page-link">
-          <span aria-hidden='true'>Previous</span>
-        </a>
-      </li>
+        <div class="col-md-9">
+          <th:block th:each="board, status: ${boards.getContent()}">
+          <div class="d-lg-flex post-entry-1">
+            <a th:href="'/board/' +${board.id}" class="me-4 thumbnail mb-4 mb-lg-0 d-inline-block">
+              <img th:src="${board.imgUrl}" th:alt="${board.title}" class="img-fluid">
+            </a>
+            <div>
+              <div class="post-meta"><span class="date">Post</span> <span class="mx-1">&bullet;</span> <span>[[${board.regTime}]]</span></div>
+              <h3><a href="single-post.html">[[${board.title}]]</a></h3>
+              <p>[[${board.content}]]</p>
+              <div class="d-flex align-items-center author">
+                <div class="photo"><img src="../bootstrap/img/blog1.jpg" alt="" class="img-fluid"></div>
+                <div class="name">
+                  <h3 class="m-0 p-0">[[${board.createdBy}]]</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </th:block>
+      </div>
+    </div>
+    </div>
+  </section><!-- End Culture Category Section -->
 
-      <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${boards.number eq page-1}?'active':''">
-        <a th:href="@{'/?searchQuery=' + ${boardSearchDto.searchQuery} + '&page=' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
-      </li>
 
-      <li class="page-item" th:classappend="${boards.number+1 ge boards.totalPages}?'disabled':''">
-        <a th:href="@{'/?searchQuery=' + ${boardSearchDto.searchQuery} + '&page=' + ${boards.number+1}}" aria-label='Next' class="page-link">
-          <span aria-hidden='true'>Next</span>
-        </a>
-      </li>
+  <!-- ======= Post Grid Section ======= -->
+  <section id="posts" class="posts">
+    <div class="container" data-aos="fade-up">
+      <div class="row g-5">
+        <th:block th:each="item, status: ${items.getContent()}">
+          <div class="col-lg-5">
+            <div class="post-entry-1 lg">
+              <a th:href="'/item/' +${item.id}"><img th:src="${item.imgUrl}" th:alt="${item.itemNm}" class="img-fluid"></a>
+              <div class="post-meta"><span class="date">Product</span> <span class="mx-1">&bullet;</span> <span>[[${item.updateTime}]]</span></div>
+              <h2><a href="single-post.html">[[${item.itemNm}]]</a></h2>
+              <p class="mb-4 d-block">[[${item.itemDetail}]]</p>
+              <h3>[[${item.price}]]원</h3>
 
-    </ul>
-  </div>
+              <div class="d-flex align-items-center author">
+                <div class="photo"><img src="../bootstrap/img/sell1.jpg" alt="" class="img-fluid"></div>
+                <div class="name">
+                  <h3 class="m-0 p-0">[[${item.createdBy}]]</h3>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-lg-7">
+            <div class="row g-5">
+              <div class="col-lg-4 border-start custom-border">
+
+                <th:block th:each="boardDto : ${boardList}">
+                <div class="post-entry-1">
+                  <a th:href="@{single-post.html}"><img th:src="${boardDto.imgUrl}" alt="" class="img-fluid"></a>
+                  <div class="post-meta"><span class="date">Post</span> <span class="mx-1">&bullet;</span> <span>[[${#temporals.format(boardDto.regTime, 'yy-MM-dd')}]]</span></div>
+                  <h2><a href="single-post.html">[[${boardDto.title}]]</a></h2>
+                  <p>[[${boardDto.content}]]</p>
+                </div>
+                </th:block>
+              </div>
+
+              <div class="col-lg-4 border-start custom-border">
+                <th:block th:each="boardDto : ${boardList}">
+                <div class="post-entry-1">
+                  <a th:href="@{single-post.html}"><img th:src="${boardDto.imgUrl}" alt="" class="img-fluid"></a>
+                  <div class="post-meta"><span class="date">Post</span> <span class="mx-1">&bullet;</span> <span>[[${#temporals.format(boardDto.regTime, 'yy-MM-dd')}]]</span></div>
+                  <h2><a href="single-post.html">[[${boardDto.title}]]</a></h2>
+                  <p>[[${boardDto.content}]]</p>
+                </div>
+                </th:block>
+              </div>
+
+
+            </div>
+          </div>
+        </th:block>
+      </div> <!-- End .row -->
+    </div>
+  </section> <!-- End Post Grid Section -->
+
 
 </div>
