@@ -99,4 +99,8 @@ public class BoardService {
 		return boardRepository.getMainBoardList();
 	}
 	
+	public List<Board> findBoardList(String createdBy){
+		return boardRepository.findByCreatedByOrderByIdDesc(createdBy);
+	}
+	
 }

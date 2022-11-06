@@ -28,4 +28,6 @@ QuerydslPredicateExecutor<Board>, BoardRepositoryCustom{
 	List<Board> findByContent(String content);	// 내용으로 조회
 	
 	List<Board> findByTitleOrContent(String title, String content);	// 상품명 또는 내용으로 검색
+	
+	List<Board> findByCreatedByOrderByIdDesc(String createdBy);	// 작성자로 검색
 }
