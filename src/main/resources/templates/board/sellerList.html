@@ -42,7 +42,7 @@
       <tr th:each="member, status: ${members.getContent()}">
         <td class="text-center align-middle">[[${member.id}]]</td>
         <td class="text-center align-middle">[[${member.email}]]</td>
-        <td class="text-center align-middle"><a th:href="/board/boardList/+{member.id}">[[${member.name}]]</a></td>
+        <td class="text-center align-middle"><a th:href="'/board/boardList/' +${member.email}">[[${member.name}]]</a></td>
       </tr>
       </tbody>
     </table>

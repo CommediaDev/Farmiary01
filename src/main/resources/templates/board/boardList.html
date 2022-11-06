@@ -14,7 +14,7 @@
             </thead>
             <tbody>
             <tr th:each="board, status: ${boardList}">
-                <td th:text="${board.title}"></td>
+                <td><a th:href="'/board/' +${board.id}">[[${board.title}]]</a></td>
                 <td th:text="${board.createdBy}"></td>
                 <td th:text="${#temporals.format(board.regTime, 'yyyy-MM-dd')}"></td>
             </tr>
