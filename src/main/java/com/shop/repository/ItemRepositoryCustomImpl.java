@@ -101,7 +101,9 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                                 item.itemNm,
                                 item.itemDetail,
                                 itemImg.imgUrl,
-                                item.price)
+                                item.price,
+                                item.updateTime,
+                                item.createdBy)
                 )
                 .from(itemImg)
                 .join(itemImg.item, item)
@@ -146,9 +148,9 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                 .join(itemImg.item, item)
                 .where(itemImg.repimgYn.eq("Y"))
                 .where(itemNmLike(itemSearchDto.getSearchQuery()))
-                .orderBy(item.id.desc())
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
+                .orderBy(item.id.desc())//최신 -> 과거순
+                .offset(pageable.getOffset())//페이지 번호
+                .limit(pageable.getPageSize())//페이지 사이즈
                 .fetch();
 
         long total = queryFactory

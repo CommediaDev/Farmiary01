@@ -150,4 +150,13 @@ public class BoardController {
 
 		return "board/sellerList";
 	}
+	
+	@GetMapping(value = "/board/boardList/{memberId}")
+	public String boardList(Model model, @PathVariable("memberId") String createdBy) {
+		List<Board> boardList = boardService.findBoardList(createdBy);
+		
+		model.addAttribute("boardList", boardList);
+		return "board/boardList";
+	}
+	
 }

@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import com.querydsl.core.types.dsl.NumberExpression;
+import com.querydsl.core.types.dsl.NumberOperation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -87,10 +89,13 @@ public class BoardRepositoryCustomImpl implements BoardRepositoryCustom{
 		List<MainBoardDto> content = queryFactory
 				.select(
 						new QMainBoardDto(
+
 								board.id,
 								board.title,
 								board.content,
-								boardImg.imgUrl)
+								boardImg.imgUrl,
+								board.regTime,
+								board.createdBy)
 						)
 				.from(boardImg)
 				.join(boardImg.board, board)	// boardImg와 board를 내부 조인
@@ -103,5 +108,28 @@ public class BoardRepositoryCustomImpl implements BoardRepositoryCustom{
 		
 		long total = content.size();
 		return new PageImpl<>(content, pageable, total);
+	}
+
+	public List<MainBoardDto> getMainBoardList(){
+		QBoard board = QBoard.board;
+		QBoardImg boardImg = QBoardImg.boardImg;
+
+		List<MainBoardDto> content = queryFactory
+				.select(
+						new QMainBoardDto(
+								board.id,
+								board.title,
+								board.content,
+								boardImg.imgUrl,
+								board.regTime,
+								board.createdBy)
+				)
+				.from(boardImg)
+				.join(boardImg.board, board)
+				.where(boardImg.repimgYn.eq("Y"))
+				.limit(3)
+				.fetch();
+
+		return content;
 	}
 }

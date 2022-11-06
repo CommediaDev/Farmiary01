@@ -94,4 +94,11 @@ public class MemberService implements UserDetailsService {
     public Page<Member> getRolePage2(Pageable pageable) {
         return memberRepository.getRolePage2(pageable);
     }
+
+    //회원 탈퇴
+    public void deleteMember(String email){
+        Long deleteId = memberRepository.findIdByEmail(email);
+        memberRepository.deleteById(deleteId);
+    }
+
 }
