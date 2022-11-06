@@ -25,6 +25,7 @@ public class MainItemDto {
 
 
     @QueryProjection
+
     public MainItemDto(Long id, String itemNm, String itemDetail,
                        String imgUrl,Integer price, LocalDateTime updateTime, String createdBy){
         this.id = id;
