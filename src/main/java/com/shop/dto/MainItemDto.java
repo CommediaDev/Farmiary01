@@ -23,8 +23,10 @@ public class MainItemDto {
 
     private String createdBy;
 
+
     @QueryProjection
-    public MainItemDto(Long id, String itemNm, String itemDetail, String imgUrl,Integer price, LocalDateTime updateTime, String createdBy){
+    public MainItemDto(Long id, String itemNm, String itemDetail,
+                       String imgUrl,Integer price, LocalDateTime updateTime, String createdBy){
         this.id = id;
         this.itemNm = itemNm;
         this.itemDetail = itemDetail;

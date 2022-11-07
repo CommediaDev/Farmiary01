@@ -49,5 +49,10 @@ public class MainController {
     public String myPage(){
         return "/member/myPage";
     }
+    
+    @GetMapping(value = "/members/kakao_login")
+    public String kakaoLogin() {
+    	return "/member/kakao_login";
+    }
 
 }

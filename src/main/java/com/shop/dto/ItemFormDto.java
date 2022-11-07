@@ -30,6 +30,7 @@ public class ItemFormDto {
 
     private ItemSellStatus itemSellStatus;
 
+    //상품 저장 후 수정할 때 상품 이미지 정보를 저장하는 리스트
     private List<ItemImgDto> itemImgDtoList = new ArrayList<>();
 
     private List<Long> itemImgIds = new ArrayList<>();
