@@ -57,6 +57,12 @@
             <p class="lead" th:text="${board.content}"></p>
         </div>
     </div>
+    
+    <th:block sec:authorize="isAuthenticated()">
+       	<a th:href="'/user/board/' + ${board.id}" th:if="${board.createdBy} == ${#authentication.getPrincipal().getUsername}">
+       	<button>수정하기</button></a>
+       	<a th:href="'/board/delete/' + ${board.id}" th:if="${board.createdBy} == ${#authentication.getPrincipal().getUsername}" onclick="return confirm('정말로 삭젲하시겠습니까?');"><button>삭제하기</button></a>
+    </th:block>
 
 </div>
 

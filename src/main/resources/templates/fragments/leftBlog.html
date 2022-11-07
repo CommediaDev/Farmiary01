@@ -5,6 +5,7 @@
     <div class="list-group">
         <a href="/board/boardMain" class="list-group-item">게시글 목록</a>
         <a href="/board/bloger" class="list-group-item">블로거 목록</a>
+        <!-- <a href="/user/boards" class="list-group-item">게시글 관리</a> -->
 	    <a class="list-group-item" href="/user/board/boardForm" sec:authorize="hasAnyAuthority({'ROLE_SELLER'})">게시글 작성</a>
     </div>
 </div>

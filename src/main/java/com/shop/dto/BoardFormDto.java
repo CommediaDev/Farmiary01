@@ -19,6 +19,8 @@ public class BoardFormDto {
 	
 	private String content;
 	
+	private String createdBy;
+	
 	private List<BoardImgDto> boardImgDtoList = new ArrayList<>();
 	// 게시글 저장 후 수정할 때 게시글 이미지 정보를 저장하는 리스트
 	

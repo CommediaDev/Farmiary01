@@ -17,12 +17,10 @@
 
         function page(page){	// 이동할 페이지 값을 받아 현재 조회조건으로 설정된것들을 파라미터로 설정 후 상품 데이터 조회함
             var searchDateType = $("#searchDateType").val();
-            var searchSellStatus = $("#searchSellStatus").val();
             var searchBy = $("#searchBy").val();
             var searchQuery = $("#searchQuery").val();
 
-            location.href="/admin/items/" + page + "?searchDateType=" + searchDateType
-            + "&searchSellStatus=" + searchSellStatus
+            location.href="/user/boards/" + page + "?searchDateType=" + searchDateType
             + "&searchBy=" + searchBy
             + "&searchQuery=" + searchQuery;
         }
@@ -45,11 +43,9 @@
         <table class="table">
             <thead>
             <tr>
-                <td>상품아이디</td>
-                <td>상품명</td>
-                <td>상태</td>
-                <td>등록자</td>
-                <td>등록일</td>
+                <td>보드아이디</td>
+                <td>제목</td>
+                <td>내용</td>
             </tr>
             </thead>
             <tbody>

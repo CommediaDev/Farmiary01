@@ -13,4 +13,7 @@ public interface BoardImgRepository extends JpaRepository<BoardImg, Long>{
 	
 	// 대표 이미지를 찾는 쿼리 메소드
 	BoardImg findByBoardIdAndRepimgYn(Long boardId, String repimgYn);
+	
+	// 보드 이미지들 삭제
+	void deleteByBoardId(Long boardId);
 }
