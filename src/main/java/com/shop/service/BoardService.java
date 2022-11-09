@@ -103,4 +103,9 @@ public class BoardService {
 		return boardRepository.findByCreatedByOrderByIdDesc(createdBy);
 	}
 	
+	public void deleteBoard(Long boardId) {
+		boardImgRepository.deleteByBoardId(boardId);
+		boardRepository.deleteById(boardId);
+	}
+	
 }

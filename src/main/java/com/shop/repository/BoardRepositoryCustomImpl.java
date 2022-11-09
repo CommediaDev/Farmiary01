@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 
 import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.core.types.dsl.NumberOperation;
+import com.querydsl.core.types.dsl.Wildcard;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -73,7 +75,11 @@ public class BoardRepositoryCustomImpl implements BoardRepositoryCustom{
 				.limit(pageable.getPageSize())
 				.fetch();
 		
-		long total = content.size();
+		long total = queryFactory.select(Wildcard.count).from(QBoard.board)
+				.where(regDtsAfter(boardSearchDto.getSarchDateType()),
+						searchByLike(boardSearchDto.getSearchBy(), boardSearchDto.getSearchQuery()))
+				.fetchOne();
+		
 		return new PageImpl<>(content, pageable, total);
 	}
 	
