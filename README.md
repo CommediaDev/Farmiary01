@@ -4,8 +4,7 @@
 ## 농부들을 위한 커뮤니티 및 판매 홈페이지입니다.
 >   자신이 키우는 작물에 대해 작물일기를 작성하거나
     농사 관련 이야기를 여러 사람들과 공유할 수 있는
-    사이트이며 작물 판매도 가능합니다. 
->
+    사이트이며 작물 판매도 가능합니다.
     농사 지식이 부족한 젊은 농부들에게 자신의 노하우 공유,
     점차 줄어들는 농사꾼을 위하여 제작되었습니다.
 
@@ -75,23 +74,27 @@
   - mathces()를 이용하여 boolean 형태로 리턴 받음
 
 ### 4.3 Controller
-- 
-
+- **상품 등록 페이지** :pushpin: [코드 확인](https://github.com/CommediaDev/Farmiary01/blob/d12ab07e4b29710e05616557d2cb8207fb40133d/src/main/resources/templates/item/itemForm.html)
+  - 데이터 무결성 보장
 ### 4.4 Service
-
+- **상품 수정** :pushpin: [코드 확인](https://github.com/CommediaDev/Farmiary01/blob/ab3e659a50700fff6052b18aa2d8cf2abd3cfd15/src/main/java/com/shop/service/ItemService.java)
 
 ### 4.5 Repository
-
-
+- **상품 관리** :pushpin: [코드 확인](https://github.com/CommediaDev/Farmiary01/blob/c2aca2c6e83178394bc5f36ba1ed91a15fb47ed1/src/main/java/com/shop/repository/ItemRepositoryCustomImpl.java)
+  - Querydsl
+    - 상품 등록일
+    - 상품 판매 상태
+    - 상품명 또는 상품 등록자 아이디
 </div>
 </details>
 
 ## 5.핵심 트러블 슈팅
 <details>
 <summary>지연 로딩을 통해서 쿼리문이 필요할 때만 실행되도록 최적화</summary>
+
 - 성능 저하는 데이터를 저장하거나 수정할 때 일어나기보다는, 데이터를 조회 할 때 일어남
 
-![엔티티 지연 로딩]()
+![엔티티 지연 로딩](지연로딩.png)
 <div markdown="1"> 
 </div>
 </details>
