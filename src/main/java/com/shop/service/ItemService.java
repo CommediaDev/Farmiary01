@@ -54,16 +54,16 @@ public class ItemService {
         return item.getId();
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true) //상품 데이터를 읽어오는 트랜잭션을 읽기 전용 설정
     public ItemFormDto getItemDtl(Long itemId){
-        List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
+        List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);//상품 이미지 조회 - 등록순을 가져오기 위해 상품 이미지 아이디 오름차순 설정
         List<ItemImgDto> itemImgDtoList = new ArrayList<>();
         for (ItemImg itemImg : itemImgList) {
             ItemImgDto itemImgDto = ItemImgDto.of(itemImg);
             itemImgDtoList.add(itemImgDto);
         }
 
-        Item item = itemRepository.findById(itemId)
+        Item item = itemRepository.findById(itemId)//상품의 아이디를 통해 상품 엔티티를 조회
                 .orElseThrow(EntityNotFoundException::new);
         ItemFormDto itemFormDto = ItemFormDto.of(item);
         itemFormDto.setItemImgDtoList(itemImgDtoList);
@@ -74,8 +74,8 @@ public class ItemService {
         //상품 수정
         Item item = itemRepository.findById(itemFormDto.getId())
                 .orElseThrow(EntityNotFoundException::new);
-        item.updateItem(itemFormDto);
-        List<Long> itemImgIds = itemFormDto.getItemImgIds();
+        item.updateItem(itemFormDto);                       //화면으로부터 전달 받은 상품 아이디를 이용해서 상품 엔티티 조회
+        List<Long> itemImgIds = itemFormDto.getItemImgIds();//상품 이미지 아이디 리스트 조회
 
         //이미지 등록
         for(int i=0;i<itemImgFileList.size();i++){
