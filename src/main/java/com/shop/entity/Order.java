@@ -20,7 +20,7 @@ public class Order extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private Member member;
+    private Member member;          //한 명의 회원은 여러 번 주문할 수 있으므로 다대일 단방향 매핑
 
     private LocalDateTime orderDate; //주문일
 

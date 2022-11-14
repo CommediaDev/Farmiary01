@@ -32,12 +32,13 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    //Member 엔티티에 회원을 생성하는 메소드를 만들어서 관리
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder){
         Member member = new Member();
         member.setName(memberFormDto.getName());
         member.setEmail(memberFormDto.getEmail());
         member.setAddress(memberFormDto.getAddress());
-        String password = passwordEncoder.encode(memberFormDto.getPassword());
+        String password = passwordEncoder.encode(memberFormDto.getPassword());//BCryptPasswordEncoder Bean을 파라미터로 넘겨서 비밀번호를 암호화
         member.setPassword(password);
         member.setRole(Role.ADMIN);
         return member;

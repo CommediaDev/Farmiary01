@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface MemberRepository extends JpaRepository<Member, Long>,
 MemberRepositoryCustom{
-
+    //회원가입 시 중복된 회원이 있는지 검사
     Member findByEmail(String email);
 
     @Query("select m.id from Member m " +
